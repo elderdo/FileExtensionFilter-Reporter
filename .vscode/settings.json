@@ -13,5 +13,12 @@
   },
   "python.analysis.diagnosticMode": "openFilesOnly",
   "python.analysis.typeCheckingMode": "basic",
-  "cSpell.words": ["slnx"]
+  "cSpell.words": [
+    "defaultdict",
+    "pathlib",
+    "pycache",
+    "slnx",
+    "startswith",
+    "subfolders"
+  ]
 }
