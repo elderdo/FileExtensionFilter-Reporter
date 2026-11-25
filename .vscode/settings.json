@@ -1,0 +1,17 @@
+{
+  "[python]": {
+    "editor.quickSuggestions": {
+      "other": false,
+      "comments": false,
+      "strings": false
+    },
+    "editor.suggestOnTriggerCharacters": false,
+    "editor.inlineSuggest.enabled": false,
+    "editor.parameterHints.enabled": false,
+    "editor.hover.enabled": "off",
+    "editor.wordBasedSuggestions": "off"
+  },
+  "python.analysis.diagnosticMode": "openFilesOnly",
+  "python.analysis.typeCheckingMode": "basic",
+  "cSpell.words": ["slnx"]
+}
