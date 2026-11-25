@@ -19,25 +19,21 @@ def deep_scan_for_extensions(
     found_files_log: dict[str, list[Path]],
 ) -> set[str]:
     """
-    Recursively scans start_dir and its subdirectories for target_exts.
-    Stops scanning as soon as at least one matching file is found, returning
-    the matched extension(s) in that directory.
+    Recursively scans start_dir and all its non-ignored subdirectories for target_exts.
+    Records every matching file in found_files_log and returns all matched extensions.
     """
+    all_matched: set[str] = set()
+
     for current_dir, dirs, files in start_dir.walk():
         dirs[:] = [d for d in dirs if d not in IGNORED_DIRS and not d.startswith(".")]
 
-        matched_in_dir = set()
         for f in files:
             ext = Path(f).suffix.lower()
             if ext in target_exts:
-                matched_in_dir.add(ext)
+                all_matched.add(ext)
                 found_files_log[ext].append(current_dir / f)
 
-        # Stop diving deeper once a match is found
-        if matched_in_dir:
-            return matched_in_dir
-
-    return set()
+    return all_matched
 
 
 def analyze_folders(
@@ -77,7 +73,7 @@ def analyze_folders(
         if not has_primary:
             missing_primary_folders.append(current_dir)
 
-            # Perform deeper dive for secondary extensions if requested
+            # Perform full deeper dive for secondary extensions if requested
             if deep_exts:
                 matched_deep = deep_scan_for_extensions(current_dir, deep_exts, found_files_log)
                 if matched_deep:
